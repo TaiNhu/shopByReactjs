@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.registration-wrapper{
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.registration-form{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 4px;
+    gap: 10px;
+    &>.registration-form__user-name{
+
+    }
+    &>input{
+        width: 150px;
+        border-radius: 4px;
+        outline: none;
+        padding: 5px 0 5px 5px;
+    }
+    &>button{
+        padding: 5px 12px;
+    }
+}

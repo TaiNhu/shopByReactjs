@@ -1,0 +1,33 @@
+<header>
+    <div class="header--img"></div>
+    <div class="header--logo-wrapper">
+        <h1 class="header--logo">CUE THE COLOR</h1>
+        <button><a href="#!shop">Shop the collection</a></button>
+    </div>
+</header>
+<div class="popular-stuff">
+    <h1 class="popular-stuff--header">BEST SELLERS</h1>
+    <hr />
+    <div class="carousel">
+        <button id="decrease" ng-click="decreaseBtn()">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+        <div class="carousel--items">
+            <div class="carosel--item {{item.$id}}" ng-repeat="item in sanpham" ng-show="item.sell > 10">
+                <a href="#!product/{{item.$id}}" ng-click="changeDetailPage($event)">
+                    <span ng-show="item.sell > 10">Best Seller</span>
+                    <img src={{item.img}} alt="" />
+                    <div class=" attachment" ng-click="showQuickReview($event, item.$id)">Quick review</div>
+                    <div class="carousel--item--info">
+                        <h3 ng-bind="item.name"></h3>
+                        <span ng-bind="item.price|currency"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <button id="increase" ng-click="increaseBtn()">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </button>
+    </div>
+    <button class="popular-stuff--button"><a href="#!shop">Shop All</a></button>
+</div>

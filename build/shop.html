@@ -1,0 +1,58 @@
+<h1 class="title">SHOP ALL</h1>
+<div class="products--wrapper">
+    <div class="filter">
+        <h2>FILTER BY</h2>
+        <div class="panel-group" id="accordion">
+            <div class="detail--wrapper">
+                <ul>
+                    <li>
+                        <div class='detail--header' ng-click="openFilter(0)">Collection &nbsp;<ion-icon
+                                name={{iconName[0]}}></ion-icon>
+                        </div>
+                        <ul class="detail-content">
+                            <li  style="cursor: 'pointer'; font-family:'Poppins';" ng-click="filterBy('all')">All</li>
+                            <li  style="cursor: 'pointer'; font-family:'Poppins';" ng-click="filterBy('c1')">Bags</li>
+                            <li  style="cursor: 'pointer'; font-family:'Poppins';" ng-click="filterBy('c2')">Phone cases</li>
+                            <li  style="cursor: 'pointer'; font-family:'Poppins';" ng-click="filterBy('c3')">Belts</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="detail--wrapper">
+                <ul>
+                    <li>
+                        <div class='detail--header' ng-click="openFilter(1)">Price &nbsp;<ion-icon
+                                name={{iconName[1]}}></ion-icon>
+                        </div>
+                        <ul class="detail-content">
+                            <li  style="cursor: pointer; font-family:'Poppins';" ng-click="filterBy('all')">All</li>  
+                            <li  style="cursor: pointer; font-family:'Poppins';" ng-click="filterBy('1,50')">$1 - 50</li>  
+                            <li  style="cursor: pointer; font-family:'Poppins';" ng-click="filterBy('51,100')">$51 - 100</li>  
+                            <li  style="cursor: pointer; font-family:'Poppins';" ng-click="filterBy('101, 500')">$101 - 500</li>  
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="products">
+            <p style="text-align: center;" ng-show="sanpham.length < 1">No Result.</p>
+                <div class="carosel--item {{item.$id}}" ng-click="" ng-repeat="item in sanpham | limitTo : 4 : begin" >
+                    <a href="#!product/{{item.$id}}" ng-click="changeDetailPage($event)">
+                        <span ng-show="item.sell > 10">Best Seller</span>
+                        <img src={{item.img}} alt="" />
+                        <div class=" attachment" ng-click="showQuickReview($event, item.$id)">Quick review</div>
+                        <div class="carousel--item--info">
+                            <h3 ng-bind="item.name"></h3>
+                            <span ng-bind="item.price|currency"></span>
+                        </div>
+                    </a>
+                </div>
+        </div>
+        <div class="pagination">
+            <a ng-repeat="number in paginationNumbers" ng-click="changePage(number)">{{number}}</a>
+        </div>
+    </div>
+</div>
+</React.Fragment>

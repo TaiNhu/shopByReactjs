@@ -1,0 +1,9 @@
+<div class='registration-wrapper'>
+    <h3>Registration</h3>
+    <form class="registration-form">
+        <input type="text" placeholder='User name' class='registration-form__user-name' required ng-model="username"/>
+        <input type="text" placeholder='Full name' class='registration-form__full-name' required ng-model="fullname"/>
+        <input type="password" placeholder='Password' class='registration-form__password' required ng-model="password" />
+        <button ng-click="registration(username, fullname, password)">Registration</button>
+    </form>
+</div>

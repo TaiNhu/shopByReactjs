@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="https://www.magicball.net/files/images/l/b/a/lba2adeline_0.gif" type="image/x-icon">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Assignment</title>
+    <!-- <script defer="defer" src="./static/js/main.a638219d.js"></script> -->
+    <link href="./static/css/main.7d303199.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="myCtrl">
+    <div class="container">
+        <div class="strip" id="home">
+            <div class="col-1">
+                <ion-icon name="search-outline" class="col-1--icon"></ion-icon><input class="search"
+                    placeholder="Search...">
+            </div>
+            <div class="col-2">
+                <p class="strip--logo">adalene.</p>
+            </div>
+            <div class="col-3">
+                <div class="social"><a href="https://facebook.com" target="_blank">
+                        <ion-icon name="logo-facebook" class="nav--icon"></ion-icon>
+                    </a><a href="https://instagram.com" target="_blank">
+                        <ion-icon name="logo-instagram" class="nav--icon"></ion-icon>
+                    </a><a href="https://twitter.com" target="_blank">
+                        <ion-icon name="logo-twitter" class="nav--icon"></ion-icon>
+                    </a><a href="https://pinterest.com" target="_blank">
+                        <ion-icon name="logo-pinterest" class="nav--icon"></ion-icon>
+                    </a></div>
+                <section class="login-wrapper">
+                    <div class="login--header" style="cursor:pointer" ng-click="changeLoginPage()">
+                        <ion-icon name="person-circle-outline" class="login--user--icon nav--icon"></ion-icon>&nbsp;
+                        <span ng-show="!user">Login</span>
+                        <span ng-show="user" ng-bind="user.fullname"></span>
+                    </div>
+                </section><button class="cart">Cart (<span ng-bind="quantity"></span>)</button>
+            </div><button class="menu">
+                <div class="straight-line"></div>
+                <div class="straight-line"></div>
+                <div class="straight-line"></div>
+            </button>
+        </div>
+        <nav><br />
+            <div class="login--header" style="cursor:pointer" ng-click="changeLoginPage()">
+                <ion-icon name="person-circle-outline" class="login--user--icon nav--icon"></ion-icon>&nbsp;
+                <span ng-show="!user">Login</span>
+                <span ng-show="user" ng-bind="user.fullname"></span>
+            </div>
+            <div class="col-1">
+                <ion-icon name="search-outline" class="col-1--icon"></ion-icon><input class="search"
+                    placeholder="Search...">
+            </div>
+            <ul class="nav--ul">
+                <li><a href="#!home">Home</a></li>
+                <li><a href="#!shop">Shop All</a></li>
+                <li><a href="#story">Our Story</a></li>
+                <li><a href="#cart">Our Cart</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="article" ng-view></div>
+    <footer>
+        <div class="footer--logo">adalene.</div>
+        <div class="footer--nav">
+            <ul class="footer--nav--ul">
+                <li><a href="#!home">Home</a></li>
+                <li><a href="#!shop">Shop All</a></li>
+                <li><a href="#story">Our Story</a></li>
+                <li><a href="#craft">Our Craft</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer--info">
+            <ul class="footer--info--ul">
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Shipping & Returns</a></li>
+                <li><a href="#">Store Policy</a></li>
+                <li><a href="#">Payment Methods</a></li>
+                <li><a href="#">Stockists</a></li>
+            </ul>
+        </div>
+        <div class="contact">
+            <ul class="footer--contact--ul">
+                <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+                <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+                <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+                <li><a href="https://pinterest.com" target="_blank">Pinterest</a></li>
+            </ul>
+        </div>
+        <div class="copy-right">&copy;2023 by Nguyễn Như Tài.</div>
+    </footer>
+    <div class="cart-background">
+        <div class="cart--wrapper">
+            <div class="cart--header">
+                <ion-icon name="chevron-forward-outline" class="cart--close-icon"></ion-icon> &nbsp;
+                <span>Cart</span>
+            </div>
+            <div class="cart--content">
+                <div class="cart--items">
+                    <p ng-show="carts.length < 1" style="text-align:center">No Items.</p>
+                    <div class="cart--item" ng-repeat="x in carts">
+                        <img src="{{x.sanpham.img}}" alt="" />
+                        <div class="cart--info-item">
+                            <h3 ng-bind="x.sanpham.name"></h3>
+                            <strong ng-bind="x.sanpham.price|currency"></strong>
+                            <div class="number">
+                                <ion-icon name="remove-outline" ng-click="decrease(x)"></ion-icon>
+                                <span ng-bind="x.slBan"></span>
+                                <ion-icon name="add-outline" ng-click="increase(x)"></ion-icon>
+                            </div>
+                        </div>
+                        <div class="cart--item-close">
+                            <ion-icon name="close-outline" ng-click="removeCart(x, x.slBan)"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+
+                <span style="margin-left: 10px">
+                    SubTotal: <span id="total" ng-bind="totalSum|currency" ng-init="totalSum = 0"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="quick-review-wrapper">
+        <div class="quick-view--background">
+            <button class="close-button" ng-click="showQuickReview($event)">X</button>
+            <div class="content-wrapper">
+                <img src={{product.img}} alt="" />
+                <div class="info-wrapper">
+                    <h3 class="name" ng-bind="product.name"></h3>
+                    <h4 class="price" ng-bind="product.price|currency"></h4>
+                    <small>SKU: {{product.$id}}</small>
+                    <label htmlFor='number'>Quantity:</label>
+                    <input type='number' min='1' id='number' ng-model="amount" ng-init="amount = 1" />
+                    <button class="add-to-cart" ng-click="addCart(product, amount)">Add to Cart</button>
+                    <a href="#!product/{{product.$id}}" id='view-more' ng-click="changeDetailPage($event)">View More
+                        Detail</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js" type="module"></script>
+    <script>
+        var app = angular.module("app", ["ngRoute", "firebase"])
+        app.config(function ($routeProvider) {
+            $routeProvider.when("/home", {
+                templateUrl: "home.html"
+            }).when("/shop", {
+                templateUrl: "shop.html"
+            }).when("/product/:id", {
+                templateUrl: "product.html",
+            }).when("/login", {
+                templateUrl: "login.html"
+            }).when("/registration", {
+                templateUrl: "registration.html"
+            })
+            var config = {
+                apiKey: "AIzaSyA_XBXsCvBzMTi8nWgWyCmaUZ2dmDaqDRk", // Your Firebase API key 
+                authDomain: "adaleneclone-c61da.firebaseapp.com", // Your Firebase Auth domain ("*.firebaseapp.com") 
+                databaseURL: "https://adaleneclone-c61da-default-rtdb.firebaseio.com", // Your Firebase Database URL ("https://*.firebaseio.com") 
+                storageBucket: "adaleneclone-c61da.appspot.com" // Your Cloud Storage for Firebase bucket ("*.appspot.com") 
+            };
+            firebase.initializeApp(config);
+        })
+        app.controller("myCtrl", ["$scope", "$firebaseArray", "$routeParams",
+            function ($scope, $firebaseArray, $routeParams) {
+                $scope.sanpham = []
+                $scope.fullSanpham = []
+                $scope.begin = 0
+                $scope.paginationNumbers = [1]
+                $scope.iconName = ['add-outline', 'add-outline', 'add-outline', 'add-outline', 'add-outline']
+                $scope.carts = []
+                $scope.quantity = 0
+                $scope.user = JSON.parse(sessionStorage.getItem("user") || 'null')
+                var ref = firebase.database().ref('products');
+                var ref2 = firebase.database().ref('Account');
+                var list = $firebaseArray(ref);
+                var list2 = $firebaseArray(ref2);
+                list.$loaded()
+                    .then(function (x) {
+                        $scope.fullSanpham = x
+                        $scope.sanpham = x
+                        for (var i = 2; i <= Math.ceil(x.length / 4); i++) {
+                            $scope.paginationNumbers.push(i)
+                        }
+                        $scope.product = $scope.fullSanpham.filter(x => x.$id == window.location.hash.split('/')[window.location.hash.split('/').length - 1])[0]
+                    })
+                    .catch(function (error) {
+                        console.log("Error:", error);
+                    });
+                $scope.decreaseBtn = () => {
+                    document.querySelector('.carousel--items').scrollLeft -= document.querySelectorAll('.carosel--item')[2].clientWidth + 55
+                }
+                $scope.increaseBtn = () => {
+                    document.querySelector('.carousel--items').scrollLeft += document.querySelectorAll('.carosel--item')[2].clientWidth + 55
+                }
+                $scope.openFilter = (index) => {
+                    var clone = index
+                    if (index > 1) {
+                        clone -= 2
+                    }
+                    document.querySelectorAll('.detail--header')[clone].parentElement.querySelector('.detail-content').classList.toggle("open")
+                    if ($scope.iconName[index] === 'add-outline') {
+                        $scope.iconName[index] = "remove-outline"
+                    } else {
+                        $scope.iconName[index] = 'add-outline'
+                    }
+                }
+                $scope.changePage = (index) => $scope.begin = index * 4 - 4
+                $scope.filterBy = (key) => {
+                    if (key == 'all') {
+                        $scope.sanpham = $scope.fullSanpham
+                    } else if (key.split(',').length > 1) {
+                        $scope.sanpham = $scope.fullSanpham
+                        $scope.sanpham = $scope.sanpham.filter(x => parseInt(key.split(',')[0]) < x.price && parseInt(key.split(',')[1]) > x.price)
+                    } else {
+                        $scope.sanpham = $scope.fullSanpham
+                        $scope.sanpham = $scope.sanpham.filter(x => x.category === key)
+                    }
+                    $scope.paginationNumbers = [1]
+                    $scope.begin = 0
+                    for (var i = 2; i <= Math.ceil($scope.sanpham.length / 4); i++) {
+                        $scope.paginationNumbers.push(i)
+                    }
+                }
+                $scope.changeDetailPage = (e) => {
+                    e.preventDefault()
+                    var el = e.target
+                    while (el.tagName != 'A') {
+                        el = el.parentElement
+                    }
+                    var id = el.href.split('/')[el.href.split('/').length - 1]
+                    window.location.replace('http://127.0.0.1:5500/index.html#!/product/' + id)
+                    document.querySelector(".quick-review-wrapper").classList.remove("open")
+                    $scope.product = $scope.fullSanpham.filter(x => x.$id == id)[0]
+                    $scope.amount = 1
+                    console.log($scope.product)
+                }
+                $scope.showQuickReview = (e, id) => {
+                    e.stopImmediatePropagation()
+                    e.preventDefault()
+                    $scope.product = $scope.fullSanpham.filter(x => x.$id == id)[0]
+                    $scope.amount = 1
+                    document.querySelector(".quick-review-wrapper").classList.toggle("open")
+                }
+                $scope.addCart = (item, sl) => {
+                    $scope.quantity += sl
+                    var cart = $scope.carts.filter(x => x.sanpham.$id == item.$id)
+                    if (cart.length < 1) {
+                        $scope.carts.push({ sanpham: item, slBan: sl })
+                    } else {
+                        cart[0].slBan += sl
+                    }
+                    $scope.totalSum += item.price * sl
+                    document.querySelector(".quick-review-wrapper").classList.remove("open")
+                    document.querySelector(".cart-background").classList.add("open")
+                }
+                $scope.decrease = (item) => {
+                    if (item.slBan > 1) {
+                        item.slBan--
+                        $scope.quantity--
+                        $scope.totalSum -= item.sanpham.price
+                    }
+                }
+                $scope.increase = (item) => {
+                    item.slBan++
+                    $scope.quantity++
+                    $scope.totalSum += item.sanpham.price
+                }
+                $scope.removeCart = (item, sl) => {
+                    $scope.carts.splice($scope.carts.indexOf($scope.carts.filter(x => x.sanpham.$id == item.sanpham.$id)[0]), 1)
+                    $scope.totalSum -= item.sanpham.price * sl
+                    $scope.quantity -= sl
+                }
+                $scope.changeLoginPage = () => {
+                    if (!$scope.user) {
+                        window.location.replace("http://127.0.0.1:5500/index.html#!/login")
+                    } else {
+                        var confirm = window.confirm("Do you want logout?")
+                        if (confirm) {
+                            $scope.user = null
+                            sessionStorage.removeItem("user")
+                            window.location.replace("http://127.0.0.1:5500/index.html#!/home")
+                        }
+                    }
+                }
+                $scope.login = (e, username, password, remmeber = false) => {
+                    e.preventDefault()
+                    list2.$loaded()
+                        .then(function (x) {
+                            for (var i = 0; i < x.length; i++) {
+                                if (x[i].username == username && x[i].password == password) {
+                                    $scope.user = x[i]
+                                    if (remmeber) {
+                                        sessionStorage.setItem("user", JSON.stringify($scope.user))
+                                    }
+                                    alert('thanh cong')
+                                    window.location.replace("http://127.0.0.1:5500/index.html#!/home")
+                                    return
+                                }
+                            }
+                            alert("that bai")
+                            return
+                        }).catch(function (e) {
+                            console.log(e)
+                        })
+                }
+                $scope.registration = (username, fullname, password) => {
+                    list2.$add({ username, fullname, password }).then(function (ref) {
+                        var id = ref.key;
+                        list2.$indexFor(id); // returns location in the array
+                    });
+                }
+            }
+        ]);
+    </script>
+</body>
+
+</html>

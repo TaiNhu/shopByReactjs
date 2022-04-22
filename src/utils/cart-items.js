@@ -1,0 +1,2 @@
+let cartItems = []
+export { cartItems }
