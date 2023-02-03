@@ -18,6 +18,14 @@ create shopping web by reactjs
  - Chi tiết sản phẩm:
 ![screencapture-localhost-3000-2023-02-03-10_57_00](https://user-images.githubusercontent.com/76104316/216509235-d9a1a576-57f9-475d-9a89-13d20062df28.png)
 # Responsive:
- - ![screencapture-tainhu-github-io-shopByAngularjs-index-html-2023-02-03-11_00_53](https://user-images.githubusercontent.com/76104316/216510358-110c897e-c409-4c3d-b393-f5dd3358eebc.png)
- - ![screencapture-tainhu-github-io-shopByAngularjs-index-html-2023-02-03-11_00_53](https://user-  - images.githubusercontent.com/76104316/216510553-85942f6c-16fa-4ec5-a96a-92c46cc6e473.png)
-![screencapture-localhost-3000-2023-02-03-11_11_23](https://user-images.githubusercontent.com/76104316/216510771-4f75ab3a-93dc-47d1-9c24-f67e4694c2be.png)
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/76104316/216510358-110c897e-c409-4c3d-b393-f5dd3358eebc.png" alt="Material Bread logo">
+</p>
+   <hr/>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/76104316/216510965-1a84a987-93d7-4e1f-9898-c5927088fd9c.png" />
+ </p>
+   <hr/>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/76104316/216510771-4f75ab3a-93dc-47d1-9c24-f67e4694c2be.png" />
+ </p>
